@@ -110,6 +110,7 @@ namespace Game
 			{
 				this.Explode();
 			}
+			CameraController.ApplyScreenShake(this.GameObj.Transform.Pos, 0.15f, this.GameObj);
 		}
 		public void Explode()
 		{
@@ -125,6 +126,7 @@ namespace Game
 			}
 			this.GameObj.ParentScene.AddObject(explosionObj);
 			this.GameObj.DisposeLater();
+			CameraController.ApplyScreenShake(this.GameObj.Transform.Pos, 1.0f);
 		}
 
 		void ICmpUpdatable.OnUpdate()
