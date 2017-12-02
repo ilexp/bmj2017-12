@@ -9,6 +9,7 @@ using Duality.Components.Physics;
 using Duality.Editor;
 using Duality.Resources;
 using Duality.Drawing;
+using Duality.Audio;
 
 namespace Game
 {
@@ -24,6 +25,9 @@ namespace Game
 		private float weaponEnergy = 1.0f;
 		private ContentRef<Prefab> laserPrefab = null;
 		private ContentRef<Prefab> explosionPrefab = null;
+		private ContentRef<Sound> explosionSound = null;
+		private ContentRef<Sound> weaponSound = null;
+		private ContentRef<Sound> hitSound = null;
 		private List<Transform> weaponSlots = new List<Transform>();
 
 		private Vector2 thrusterActivity = Vector2.Zero;
@@ -74,6 +78,21 @@ namespace Game
 			get { return this.explosionPrefab; }
 			set { this.explosionPrefab = value; }
 		}
+		public ContentRef<Sound> ExplosionSound
+		{
+			get { return this.explosionSound; }
+			set { this.explosionSound = value; }
+		}
+		public ContentRef<Sound> WeaponSound
+		{
+			get { return this.weaponSound; }
+			set { this.weaponSound = value; }
+		}
+		public ContentRef<Sound> HitSound
+		{
+			get { return this.hitSound; }
+			set { this.hitSound = value; }
+		}
 		public List<Transform> WeaponSlots
 		{
 			get { return this.weaponSlots; }
@@ -96,6 +115,8 @@ namespace Game
 			if (this.weaponTimer <= 0.0f)
 			{
 				this.weaponTimer += this.weaponDelay;
+
+				float audioVol = 0.0f;
 				foreach (Transform slot in this.weaponSlots)
 				{
 					if (this.weaponEnergy < 0.1f) continue;
@@ -111,6 +132,19 @@ namespace Game
 					laserObj.GetComponent<Laser>().TeamColor = this.teamColor;
 
 					Scene.Current.AddObject(laserObj);
+					audioVol += 1.0f / (float)this.weaponSlots.Count;
+				}
+
+				if (this == this.GameObj.ParentScene.FindComponent<Player>().ControlTarget)
+				{
+					SoundInstance sound = DualityApp.Sound.PlaySound(this.weaponSound);
+					sound.Volume = audioVol;
+				}
+				else
+				{
+					SoundInstance sound = DualityApp.Sound.PlaySound3D(this.weaponSound, this.GameObj);
+					sound.Volume = audioVol * 0.5f;
+					sound.Lowpass = 0.75f;
 				}
 			}
 		}
@@ -123,6 +157,17 @@ namespace Game
 				this.Explode();
 			}
 			CameraController.ApplyScreenShake(this.GameObj.Transform.Pos, 0.15f, this.GameObj);
+
+			if (this == this.GameObj.ParentScene.FindComponent<Player>().ControlTarget)
+			{
+				SoundInstance sound = DualityApp.Sound.PlaySound(this.hitSound);
+			}
+			else
+			{
+				SoundInstance sound = DualityApp.Sound.PlaySound3D(this.hitSound, this.GameObj);
+				sound.Volume = 0.5f;
+				sound.Lowpass = 0.75f;
+			}
 		}
 		public void Explode()
 		{
@@ -139,6 +184,17 @@ namespace Game
 			this.GameObj.ParentScene.AddObject(explosionObj);
 			this.GameObj.DisposeLater();
 			CameraController.ApplyScreenShake(this.GameObj.Transform.Pos, 1.0f);
+
+			if (this == this.GameObj.ParentScene.FindComponent<Player>().ControlTarget)
+			{
+				SoundInstance sound = DualityApp.Sound.PlaySound(this.explosionSound);
+			}
+			else
+			{
+				SoundInstance sound = DualityApp.Sound.PlaySound3D(this.explosionSound, this.GameObj);
+				sound.Volume = 0.75f;
+				sound.Lowpass = 0.75f;
+			}
 		}
 
 		void ICmpUpdatable.OnUpdate()

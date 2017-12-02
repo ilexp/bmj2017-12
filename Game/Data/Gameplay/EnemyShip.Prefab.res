@@ -215,8 +215,14 @@
           <explosionPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
             <contentPath dataType="String">Data\Graphics\Explosion.Prefab.res</contentPath>
           </explosionPrefab>
+          <explosionSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+            <contentPath dataType="String">Data\Audio\explo.Sound.res</contentPath>
+          </explosionSound>
           <gameobj dataType="ObjectRef">1019230543</gameobj>
           <health dataType="Float">1</health>
+          <hitSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+            <contentPath dataType="String">Data\Audio\hit1.Sound.res</contentPath>
+          </hitSound>
           <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
             <contentPath dataType="String">Data\Gameplay\Laser.Prefab.res</contentPath>
           </laserPrefab>
@@ -231,6 +237,7 @@
           <thrusterActivity dataType="Struct" type="Duality.Vector2" />
           <thrusterStrength dataType="Float">0.4</thrusterStrength>
           <weaponDelay dataType="Float">0.2</weaponDelay>
+          <weaponEnergy dataType="Float">1</weaponEnergy>
           <weaponSlots dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Components.Transform]]" id="2078886915">
             <_items dataType="Array" type="Duality.Components.Transform[]" id="2225814822" length="4">
               <item dataType="ObjectRef">2838802932</item>
@@ -238,6 +245,9 @@
             </_items>
             <_size dataType="Int">2</_size>
           </weaponSlots>
+          <weaponSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+            <contentPath dataType="String">Data\Audio\launchweapon1.Sound.res</contentPath>
+          </weaponSound>
           <weaponTimer dataType="Float">0</weaponTimer>
         </item>
         <item dataType="Struct" type="Game.Agent" id="3728733508">
