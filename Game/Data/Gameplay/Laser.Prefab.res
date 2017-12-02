@@ -34,6 +34,31 @@
           <vel dataType="Struct" type="Duality.Vector3" />
           <velAbs dataType="Struct" type="Duality.Vector3" />
         </item>
+        <item dataType="Struct" type="Duality.Components.Renderers.SpriteRenderer" id="4246605884">
+          <active dataType="Bool">true</active>
+          <colorTint dataType="Struct" type="Duality.Drawing.ColorRgba">
+            <A dataType="Byte">255</A>
+            <B dataType="Byte">255</B>
+            <G dataType="Byte">255</G>
+            <R dataType="Byte">255</R>
+          </colorTint>
+          <customMat />
+          <flipMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+FlipMode" name="None" value="0" />
+          <gameobj dataType="ObjectRef">2777986604</gameobj>
+          <offset dataType="Int">0</offset>
+          <pixelGrid dataType="Bool">false</pixelGrid>
+          <rect dataType="Struct" type="Duality.Rect">
+            <H dataType="Float">37</H>
+            <W dataType="Float">13</W>
+            <X dataType="Float">-6.5</X>
+            <Y dataType="Float">-12.5</Y>
+          </rect>
+          <rectMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+UVMode" name="Stretch" value="0" />
+          <sharedMat dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Material]]">
+            <contentPath dataType="String">Data\Graphics\Laser.Material.res</contentPath>
+          </sharedMat>
+          <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
+        </item>
         <item dataType="Struct" type="Duality.Components.Physics.RigidBody" id="2312916092">
           <active dataType="Bool">true</active>
           <allowParent dataType="Bool">false</allowParent>
@@ -69,34 +94,20 @@
             <_size dataType="Int">1</_size>
           </shapes>
         </item>
-        <item dataType="Struct" type="Duality.Components.Renderers.SpriteRenderer" id="4246605884">
+        <item dataType="Struct" type="Game.Laser" id="1660128005">
           <active dataType="Bool">true</active>
-          <colorTint dataType="Struct" type="Duality.Drawing.ColorRgba">
+          <gameobj dataType="ObjectRef">2777986604</gameobj>
+          <hitEffect dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+            <contentPath dataType="String">Data\Graphics\LaserHit.Prefab.res</contentPath>
+          </hitEffect>
+          <lifetime dataType="Float">5</lifetime>
+          <owner />
+          <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
             <A dataType="Byte">255</A>
             <B dataType="Byte">255</B>
             <G dataType="Byte">255</G>
             <R dataType="Byte">255</R>
-          </colorTint>
-          <customMat />
-          <flipMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+FlipMode" name="None" value="0" />
-          <gameobj dataType="ObjectRef">2777986604</gameobj>
-          <offset dataType="Int">0</offset>
-          <pixelGrid dataType="Bool">false</pixelGrid>
-          <rect dataType="Struct" type="Duality.Rect">
-            <H dataType="Float">37</H>
-            <W dataType="Float">13</W>
-            <X dataType="Float">-6.5</X>
-            <Y dataType="Float">-12.5</Y>
-          </rect>
-          <rectMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+UVMode" name="Stretch" value="0" />
-          <sharedMat dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Material]]">
-            <contentPath dataType="String">Data\Graphics\Laser.Material.res</contentPath>
-          </sharedMat>
-          <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
-        </item>
-        <item dataType="Struct" type="Game.Laser" id="1660128005">
-          <active dataType="Bool">true</active>
-          <gameobj dataType="ObjectRef">2777986604</gameobj>
+          </teamColor>
         </item>
       </_items>
       <_size dataType="Int">4</_size>

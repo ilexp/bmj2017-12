@@ -951,8 +951,8 @@
     <item dataType="ObjectRef">785299993</item>
     <item dataType="ObjectRef">2900711109</item>
     <item dataType="ObjectRef">654164793</item>
-    <item dataType="ObjectRef">4278458060</item>
     <item dataType="ObjectRef">147597754</item>
+    <item dataType="ObjectRef">4278458060</item>
   </serializeObj>
   <visibilityStrategy dataType="Struct" type="Duality.Components.DefaultRendererVisibilityStrategy" id="2035693768" />
 </root>

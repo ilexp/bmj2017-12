@@ -19,6 +19,7 @@ namespace Game
 		private float lifetime = 5.0f;
 		private GameObject owner = null;
 		private ColorRgba teamColor = ColorRgba.White;
+		private ContentRef<Prefab> hitEffect = null;
 
 		public float Lifetime
 		{
@@ -34,6 +35,11 @@ namespace Game
 		{
 			get { return this.teamColor; }
 			set { this.teamColor = value; this.UpdateColor(); }
+		}
+		public ContentRef<Prefab> HitEffect
+		{
+			get { return this.hitEffect; }
+			set { this.hitEffect = value; }
 		}
 
 		private void UpdateColor()
@@ -72,6 +78,19 @@ namespace Game
 			if (otherShip == null) return;
 			if (args.CollideWith == this.owner) return;
 			if (otherShip.TeamColor == this.TeamColor) return;
+
+			ColorHsva teamColorHsva = otherShip.TeamColor.ToHsva();
+			GameObject obj = this.hitEffect.Res.Instantiate();
+			obj.Transform.Pos = this.GameObj.Transform.Pos;
+			obj.Transform.Angle = this.GameObj.Transform.Angle;
+			foreach (ParticleEmitter emitter in obj.GetComponent<ParticleEffect>().Emitters)
+			{
+				emitter.BaseVel += this.GameObj.Transform.Vel;
+				emitter.MinColor = emitter.MinColor.WithHue(MathF.Lerp(emitter.MinColor.H, teamColorHsva.H, teamColorHsva.S));
+				emitter.MaxColor = emitter.MaxColor.WithHue(MathF.Lerp(emitter.MaxColor.H, teamColorHsva.H, teamColorHsva.S));
+			}
+			this.GameObj.ParentScene.AddObject(obj);
+			CameraController.ApplyScreenShake(this.GameObj.Transform.Pos, 0.05f);
 
 			otherShip.Hit(this);
 			this.GameObj.DisposeLater();
