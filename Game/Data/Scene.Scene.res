@@ -1287,6 +1287,12 @@
         <_items dataType="Array" type="Duality.Component[]" id="1471890384" length="4">
           <item dataType="Struct" type="Game.HeadUpDisplay" id="2252878955">
             <active dataType="Bool">true</active>
+            <displayedTeamColor dataType="Struct" type="Duality.Vector4">
+              <W dataType="Float">1</W>
+              <X dataType="Float">1</X>
+              <Y dataType="Float">1</Y>
+              <Z dataType="Float">1</Z>
+            </displayedTeamColor>
             <gameobj dataType="ObjectRef">1494698076</gameobj>
           </item>
         </_items>
@@ -1315,6 +1321,100 @@
       <parent />
       <prefabLink />
     </item>
+    <item dataType="Struct" type="Duality.GameObject" id="4102889580">
+      <active dataType="Bool">false</active>
+      <children dataType="Struct" type="System.Collections.Generic.List`1[[Duality.GameObject]]" id="1138479394">
+        <_items dataType="Array" type="Duality.GameObject[]" id="2362024720" length="4">
+          <item dataType="Struct" type="Duality.GameObject" id="118072109">
+            <active dataType="Bool">true</active>
+            <children />
+            <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="3490412409">
+              <_items dataType="Array" type="Duality.Component[]" id="2071668558" length="4">
+                <item dataType="Struct" type="Duality.Components.Transform" id="175349327">
+                  <active dataType="Bool">true</active>
+                  <angle dataType="Float">0</angle>
+                  <angleAbs dataType="Float">0</angleAbs>
+                  <angleVel dataType="Float">0</angleVel>
+                  <angleVelAbs dataType="Float">0</angleVelAbs>
+                  <deriveAngle dataType="Bool">true</deriveAngle>
+                  <gameobj dataType="ObjectRef">118072109</gameobj>
+                  <ignoreParent dataType="Bool">false</ignoreParent>
+                  <parentTransform />
+                  <pos dataType="Struct" type="Duality.Vector3" />
+                  <posAbs dataType="Struct" type="Duality.Vector3" />
+                  <scale dataType="Float">1</scale>
+                  <scaleAbs dataType="Float">1</scaleAbs>
+                  <vel dataType="Struct" type="Duality.Vector3" />
+                  <velAbs dataType="Struct" type="Duality.Vector3" />
+                </item>
+                <item dataType="Struct" type="Game.SpawnPoint" id="2040500710">
+                  <active dataType="Bool">true</active>
+                  <gameobj dataType="ObjectRef">118072109</gameobj>
+                  <spawnDelay dataType="Float">30</spawnDelay>
+                  <spawnPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+                    <contentPath dataType="String">Data\Gameplay\EnemyShip.Prefab.res</contentPath>
+                  </spawnPrefab>
+                  <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+                    <A dataType="Byte">255</A>
+                    <B dataType="Byte">255</B>
+                    <G dataType="Byte">255</G>
+                    <R dataType="Byte">255</R>
+                  </teamColor>
+                </item>
+              </_items>
+              <_size dataType="Int">2</_size>
+            </compList>
+            <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="2486364544" surrogate="true">
+              <header />
+              <body>
+                <keys dataType="Array" type="System.Object[]" id="2740182739">
+                  <item dataType="ObjectRef">4277005014</item>
+                  <item dataType="Type" id="3826460262" value="Game.SpawnPoint" />
+                </keys>
+                <values dataType="Array" type="System.Object[]" id="3058186872">
+                  <item dataType="ObjectRef">175349327</item>
+                  <item dataType="ObjectRef">2040500710</item>
+                </values>
+              </body>
+            </compMap>
+            <compTransform dataType="ObjectRef">175349327</compTransform>
+            <identifier dataType="Struct" type="System.Guid" surrogate="true">
+              <header>
+                <data dataType="Array" type="System.Byte[]" id="2850491065">cYu1SiU93EujR5yvXCGi7Q==</data>
+              </header>
+              <body />
+            </identifier>
+            <initState dataType="Enum" type="Duality.InitState" name="Initialized" value="1" />
+            <name dataType="String">SpawnPoint</name>
+            <parent dataType="ObjectRef">4102889580</parent>
+            <prefabLink />
+          </item>
+        </_items>
+        <_size dataType="Int">1</_size>
+      </children>
+      <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="2090768138">
+        <_items dataType="Array" type="Duality.Component[]" id="1724416184" length="0" />
+        <_size dataType="Int">0</_size>
+      </compList>
+      <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="34448082" surrogate="true">
+        <header />
+        <body>
+          <keys dataType="Array" type="System.Object[]" id="3505042720" length="0" />
+          <values dataType="Array" type="System.Object[]" id="2420735886" length="0" />
+        </body>
+      </compMap>
+      <compTransform />
+      <identifier dataType="Struct" type="System.Guid" surrogate="true">
+        <header>
+          <data dataType="Array" type="System.Byte[]" id="2933304380">L0OCnsi5BEy+tUa/chmjEw==</data>
+        </header>
+        <body />
+      </identifier>
+      <initState dataType="Enum" type="Duality.InitState" name="Initialized" value="1" />
+      <name dataType="String">SpawnPoints</name>
+      <parent />
+      <prefabLink />
+    </item>
     <item dataType="ObjectRef">1578887473</item>
     <item dataType="ObjectRef">12716793</item>
     <item dataType="ObjectRef">1043871852</item>
@@ -1322,6 +1422,7 @@
     <item dataType="ObjectRef">2101846235</item>
     <item dataType="ObjectRef">738976140</item>
     <item dataType="ObjectRef">3711292435</item>
+    <item dataType="ObjectRef">118072109</item>
     <item dataType="ObjectRef">3760939427</item>
     <item dataType="ObjectRef">4985139</item>
     <item dataType="ObjectRef">1053062394</item>

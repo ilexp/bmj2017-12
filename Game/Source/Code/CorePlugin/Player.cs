@@ -4,6 +4,7 @@ using System.Linq;
 
 using Duality;
 using Duality.Input;
+using Duality.Resources;
 
 namespace Game
 {
@@ -34,6 +35,11 @@ namespace Game
 			{
 				this.controlTarget.FireWeapons();
 			}
+
+			if (gamepad.ButtonHit(GamepadButton.Start))
+				Scene.Reload();
+			if (gamepad.ButtonHit(GamepadButton.Back))
+				DualityApp.Terminate();
 		}
 	}
 }

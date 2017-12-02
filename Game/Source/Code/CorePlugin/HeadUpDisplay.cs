@@ -11,6 +11,7 @@ namespace Game
 	public class HeadUpDisplay : Component, ICmpRenderer, ICmpUpdatable
 	{
 		private Vector4 displayedTeamColor = ColorRgba.White.ToVector();
+		private float gameOverFade = 0.0f;
 
 		float ICmpRenderer.BoundRadius
 		{
@@ -27,12 +28,18 @@ namespace Game
 			Ship playerShip = player.ControlTarget;
 
 			Canvas canvas = new Canvas(device);
+			canvas.State.SetMaterial(new BatchInfo(DrawTechnique.Alpha, ColorRgba.White));
+
 			ColorRgba baseColor = ColorRgba.White.WithAlpha(this.displayedTeamColor.W);
 			ColorRgba defaultColor = this.displayedTeamColor.ToColor().WithAlpha(1.0f) * baseColor;
 
-			if (baseColor.A == 0) return;
+			if (this.gameOverFade > 0.0f)
+			{
+				canvas.State.ColorTint = ColorRgba.Black.WithAlpha(this.gameOverFade);
+				canvas.FillRect(0.0f, 0.0f, canvas.Width, canvas.Height);
+			}
 
-			canvas.State.SetMaterial(new BatchInfo(DrawTechnique.Alpha, ColorRgba.White));
+			if (baseColor.A == 0) return;
 			canvas.State.ColorTint = defaultColor;
 
 			// Health bar
@@ -116,9 +123,14 @@ namespace Game
 
 			ColorRgba targetColor;
 			if (playerShip == null || playerShip.Disposed)
+			{
+				this.gameOverFade = MathF.Clamp(this.gameOverFade + Time.TimeMult * Time.SPFMult / 10.0f, 0.0f, 1.0f);
 				targetColor = this.displayedTeamColor.ToColor().WithAlpha(0.0f);
+			}
 			else
+			{
 				targetColor = playerShip.TeamColor;
+			}
 
 			this.displayedTeamColor = Vector4.Lerp(this.displayedTeamColor, targetColor.ToVector(), 0.1f * Time.TimeMult);
 		}

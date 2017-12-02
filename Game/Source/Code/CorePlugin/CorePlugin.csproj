@@ -57,6 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SpawnPoint.cs" />
     <Compile Include="ObjectFieldGenerator.cs" />
     <Compile Include="CorePlugin.cs" />
     <Compile Include="ParticleEmitter.cs" />
