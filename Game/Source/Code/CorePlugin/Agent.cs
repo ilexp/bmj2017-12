@@ -18,6 +18,9 @@ namespace Game
 		private float attackPickUpRange = 1500.0f;
 		private float attackKeepRange = 2500.0f;
 
+		[DontSerialize] private Vector2 currentIntentAccelerate;
+		[DontSerialize] private Vector2 currentIntentLookAt;
+
 		[DontSerialize] private Ship attackTarget;
 		[DontSerialize] private float attackTargetTimer;
 
@@ -78,15 +81,18 @@ namespace Game
 				rotateTo += diffToTarget.Normalized;
 			}
 
-			Ship nearShip = this.GetNearestShip(250.0f, null);
+			Ship nearShip = this.GetNearestShip(350.0f, null);
 			if (nearShip != null)
 			{
 				Vector2 diffToNear = (nearShip.GameObj.Transform.Pos - this.GameObj.Transform.Pos).Xy;
-				moveInDirection += -MapVectorToUnit(diffToNear, 100.0f, 250.0f, x => 1.0f - x);
+				moveInDirection += -MapVectorToUnit(diffToNear, 100.0f, 350.0f, x => 1.0f - x);
 			}
 
-			ship.ThrusterActivity = moveInDirection.Normalized;
-			ship.RotateActivity = rotateTo.Normalized;
+			this.currentIntentAccelerate += (moveInDirection.Normalized - this.currentIntentAccelerate) * 0.1f * Time.TimeMult;
+			this.currentIntentLookAt += (rotateTo.Normalized - this.currentIntentLookAt) * 0.1f * Time.TimeMult;
+
+			ship.ThrusterActivity = this.currentIntentAccelerate;
+			ship.RotateActivity = this.currentIntentLookAt;
 			if (fireWeapons)
 				ship.FireWeapons();
 		}
