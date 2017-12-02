@@ -23,6 +23,7 @@ namespace Game
 
 		[DontSerialize] private Ship attackTarget;
 		[DontSerialize] private float attackTargetTimer;
+		[DontSerialize] private Vector2 wanderTarget;
 
 
 		void ICmpUpdatable.OnUpdate()
@@ -85,6 +86,19 @@ namespace Game
 				if (targetInFiringAngle > 0.975f + 0.025f * energyThreshold)
 					fireWeapons = true;
 			}
+			else
+			{
+				Vector2 diffToTarget = this.wanderTarget - this.GameObj.Transform.Pos.Xy;
+				moveInDirection += 0.25f * MapVectorToUnit(diffToTarget, 0.0f, 500.0f);
+				rotateTo += 0.25f * diffToTarget.Normalized;
+
+				if (diffToTarget.Length < 100.0f || this.wanderTarget == Vector2.Zero)
+				{
+					this.wanderTarget = 
+						0.75f * (this.GameObj.Transform.Pos.Xy + MathF.Rnd.NextVector2(1000.0f)) + 
+						0.25f * Vector2.Zero;
+				}
+			}
 
 			Ship nearShip = this.GetNearestShip(350.0f, null);
 			if (nearShip != null)
@@ -93,8 +107,11 @@ namespace Game
 				moveInDirection += -MapVectorToUnit(diffToNear, 100.0f, 350.0f, x => 1.0f - x);
 			}
 
-			this.currentIntentAccelerate += (moveInDirection.Normalized - this.currentIntentAccelerate) * 0.1f * Time.TimeMult;
-			this.currentIntentLookAt += (rotateTo.Normalized - this.currentIntentLookAt) * 0.1f * Time.TimeMult;
+			moveInDirection /= MathF.Max(1.0f, moveInDirection.Length);
+			rotateTo /= MathF.Max(1.0f, rotateTo.Length);
+
+			this.currentIntentAccelerate += (moveInDirection - this.currentIntentAccelerate) * 0.1f * Time.TimeMult;
+			this.currentIntentLookAt += (rotateTo - this.currentIntentLookAt) * 0.1f * Time.TimeMult;
 
 			ship.ThrusterActivity = this.currentIntentAccelerate;
 			ship.RotateActivity = this.currentIntentLookAt;
