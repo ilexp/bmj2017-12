@@ -14,7 +14,7 @@ namespace Game
 {
 	[RequiredComponent(typeof(RigidBody))]
 	[RequiredComponent(typeof(SpriteRenderer))]
-	public class Ship : Component, ICmpUpdatable
+	public class Ship : Component, ICmpUpdatable, ICmpInitializable
 	{
 		private float health = 1.0f;
 		private ColorRgba teamColor = ColorRgba.White;
@@ -146,5 +146,14 @@ namespace Game
 
 			this.weaponTimer = MathF.Max(0.0f, this.weaponTimer - Time.TimeMult * Time.SPFMult);
 		}
+		void ICmpInitializable.OnInit(InitContext context)
+		{
+			if (context == InitContext.Activate && DualityApp.ExecContext == DualityApp.ExecutionContext.Game)
+			{
+				SpriteRenderer sprite = this.GameObj.GetComponent<SpriteRenderer>();
+				sprite.ColorTint = this.teamColor;
+			}
+		}
+		void ICmpInitializable.OnShutdown(ShutdownContext context) { }
 	}
 }

@@ -66,6 +66,7 @@
     <Compile Include="Laser.cs" />
     <Compile Include="Asteroid.cs" />
     <Compile Include="Particle.cs" />
+    <Compile Include="Agent.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
