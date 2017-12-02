@@ -27,13 +27,23 @@ namespace Game
 			Ship playerShip = player.ControlTarget;
 
 			Canvas canvas = new Canvas(device);
-			ColorRgba baseColor = ColorRgba.White.WithAlpha(0.75f);
-			ColorRgba defaultColor = this.displayedTeamColor.ToColor() * baseColor;
+			ColorRgba baseColor = ColorRgba.White.WithAlpha(this.displayedTeamColor.W);
+			ColorRgba defaultColor = this.displayedTeamColor.ToColor().WithAlpha(1.0f) * baseColor;
+
+			if (baseColor.A == 0) return;
+
 			canvas.State.SetMaterial(new BatchInfo(DrawTechnique.Alpha, ColorRgba.White));
 			canvas.State.ColorTint = defaultColor;
 
 			// Health bar
 			float healthBarHeight = 150;
+			canvas.State.ColorTint = defaultColor * ColorRgba.Black.WithAlpha(0.25f);
+			canvas.FillRect(
+				10,
+				canvas.Height - 10 - healthBarHeight,
+				30,
+				healthBarHeight);
+			canvas.State.ColorTint = defaultColor;
 			canvas.DrawRect(
 				10, 
 				canvas.Height - 10 - healthBarHeight, 
@@ -72,10 +82,23 @@ namespace Game
 			{
 				Vector3 relativePos = ship.GameObj.Transform.Pos - playerShip.GameObj.Transform.Pos;
 				Vector3 normalizedPos = relativePos / radarRange;
+				if (normalizedPos.Length > 1.0f) continue;
+
 				Vector2 posOnRadar = radarArea.Center + (normalizedPos * radarDisplayRadius).Xy;
 
 				canvas.State.ColorTint = baseColor * ship.TeamColor;
 				canvas.FillCircle(posOnRadar.X, posOnRadar.Y, 3.0f);
+			}
+			foreach (Laser laser in player.GameObj.ParentScene.FindComponents<Laser>())
+			{
+				Vector3 relativePos = laser.GameObj.Transform.Pos - playerShip.GameObj.Transform.Pos;
+				Vector3 normalizedPos = relativePos / radarRange;
+				if (normalizedPos.Length > 1.0f) continue;
+
+				Vector2 posOnRadar = radarArea.Center + (normalizedPos * radarDisplayRadius).Xy;
+
+				canvas.State.ColorTint = baseColor * laser.TeamColor;
+				canvas.FillRect(posOnRadar.X, posOnRadar.Y, 1.0f, 1.0f);
 			}
 			canvas.State.ColorTint = defaultColor;
 			canvas.DrawOval(
