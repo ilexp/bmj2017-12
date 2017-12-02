@@ -28,6 +28,7 @@ namespace Game
 		private ContentRef<Sound> explosionSound = null;
 		private ContentRef<Sound> weaponSound = null;
 		private ContentRef<Sound> hitSound = null;
+		private ContentRef<Sound> thrusterSound = null;
 		private List<Transform> weaponSlots = new List<Transform>();
 
 		private Vector2 thrusterActivity = Vector2.Zero;
@@ -35,6 +36,7 @@ namespace Game
 		private float weaponTimer = 0.0f;
 
 		[DontSerialize] private Vector4 displayedTeamColor = ColorRgba.White.ToVector();
+		[DontSerialize] private SoundInstance thrusterSoundInstance = null;
 
 
 		public float Health
@@ -92,6 +94,11 @@ namespace Game
 		{
 			get { return this.hitSound; }
 			set { this.hitSound = value; }
+		}
+		public ContentRef<Sound> ThrusterSound
+		{
+			get { return this.thrusterSound; }
+			set { this.thrusterSound = value; }
 		}
 		public List<Transform> WeaponSlots
 		{
@@ -219,6 +226,13 @@ namespace Game
 			this.weaponTimer = MathF.Max(0.0f, this.weaponTimer - Time.TimeMult * Time.SPFMult);
 			this.weaponEnergy = MathF.Min(1.0f, this.weaponEnergy + Time.TimeMult * Time.SPFMult / 5.0f);
 			this.health = MathF.Min(1.0f, this.health + Time.TimeMult * Time.SPFMult / 30.0f);
+
+			//if (this.thrusterSoundInstance == null || this.thrusterSoundInstance.Disposed)
+			//{
+			//	this.thrusterSoundInstance = DualityApp.Sound.PlaySound3D(this.thrusterSound, this.GameObj);
+			//	this.thrusterSoundInstance.Looped = true;
+			//	this.thrusterSoundInstance.Volume = this.thrusterActivity.Length * (1.0f + 0.5f * thrusterBoost);
+			//}
 		}
 		void ICmpInitializable.OnInit(InitContext context)
 		{

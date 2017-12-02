@@ -227,6 +227,9 @@
             <R dataType="Byte">255</R>
           </teamColor>
           <thrusterActivity dataType="Struct" type="Duality.Vector2" />
+          <thrusterSound dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Sound]]">
+            <contentPath dataType="String">Data\Audio\engine1.Sound.res</contentPath>
+          </thrusterSound>
           <thrusterStrength dataType="Float">0.4</thrusterStrength>
           <weaponDelay dataType="Float">0.2</weaponDelay>
           <weaponEnergy dataType="Float">1</weaponEnergy>
