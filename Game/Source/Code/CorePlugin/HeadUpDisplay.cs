@@ -89,12 +89,23 @@ namespace Game
 			{
 				Vector3 relativePos = ship.GameObj.Transform.Pos - playerShip.GameObj.Transform.Pos;
 				Vector3 normalizedPos = relativePos / radarRange;
-				if (normalizedPos.Length > 1.0f) continue;
+				if ((normalizedPos * radarDisplayRadius).Xy.Length > radarDisplayRadius - 3.0f) continue;
 
 				Vector2 posOnRadar = radarArea.Center + (normalizedPos * radarDisplayRadius).Xy;
 
 				canvas.State.ColorTint = baseColor * ship.TeamColor;
 				canvas.FillCircle(posOnRadar.X, posOnRadar.Y, 3.0f);
+			}
+			foreach (SpawnPoint spawnpoint in player.GameObj.ParentScene.FindComponents<SpawnPoint>())
+			{
+				Vector3 relativePos = spawnpoint.GameObj.Transform.Pos - playerShip.GameObj.Transform.Pos;
+				Vector3 normalizedPos = relativePos / radarRange;
+				if ((normalizedPos * radarDisplayRadius).Xy.Length > radarDisplayRadius - 6.0f) continue;
+
+				Vector2 posOnRadar = radarArea.Center + (normalizedPos * radarDisplayRadius).Xy;
+
+				canvas.State.ColorTint = baseColor * spawnpoint.TeamColor * ColorRgba.Grey;
+				canvas.FillCircle(posOnRadar.X, posOnRadar.Y, 6.0f);
 			}
 			foreach (Laser laser in player.GameObj.ParentScene.FindComponents<Laser>())
 			{

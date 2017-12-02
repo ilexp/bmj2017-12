@@ -8,7 +8,7 @@
     <active dataType="Bool">true</active>
     <children />
     <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="2680225570">
-      <_items dataType="Array" type="Duality.Component[]" id="471132944" length="4">
+      <_items dataType="Array" type="Duality.Component[]" id="471132944">
         <item dataType="Struct" type="Duality.Components.Transform" id="1007367275">
           <active dataType="Bool">true</active>
           <angle dataType="Float">0</angle>
@@ -25,6 +25,29 @@
           <scaleAbs dataType="Float">1</scaleAbs>
           <vel dataType="Struct" type="Duality.Vector3" />
           <velAbs dataType="Struct" type="Duality.Vector3" />
+        </item>
+        <item dataType="Struct" type="Duality.Components.Renderers.SpriteRenderer" id="2418709337">
+          <active dataType="Bool">false</active>
+          <colorTint dataType="Struct" type="Duality.Drawing.ColorRgba">
+            <A dataType="Byte">0</A>
+            <B dataType="Byte">255</B>
+            <G dataType="Byte">255</G>
+            <R dataType="Byte">255</R>
+          </colorTint>
+          <customMat />
+          <flipMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+FlipMode" name="None" value="0" />
+          <gameobj dataType="ObjectRef">950090057</gameobj>
+          <offset dataType="Int">0</offset>
+          <pixelGrid dataType="Bool">false</pixelGrid>
+          <rect dataType="Struct" type="Duality.Rect">
+            <H dataType="Float">64</H>
+            <W dataType="Float">64</W>
+            <X dataType="Float">-32</X>
+            <Y dataType="Float">-32</Y>
+          </rect>
+          <rectMode dataType="Enum" type="Duality.Components.Renderers.SpriteRenderer+UVMode" name="Stretch" value="0" />
+          <sharedMat dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Material]]" />
+          <visibilityGroup dataType="Enum" type="Duality.Drawing.VisibilityFlag" name="Group0" value="1" />
         </item>
         <item dataType="Struct" type="Game.ParticleEffect" id="957052044">
           <active dataType="Bool">true</active>
@@ -109,7 +132,7 @@
           </teamColor>
         </item>
       </_items>
-      <_size dataType="Int">3</_size>
+      <_size dataType="Int">4</_size>
     </compList>
     <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="459407114" surrogate="true">
       <header />
@@ -118,11 +141,13 @@
           <item dataType="Type" id="3981322348" value="Duality.Components.Transform" />
           <item dataType="Type" id="3234405430" value="Game.SpawnPoint" />
           <item dataType="Type" id="65205560" value="Game.ParticleEffect" />
+          <item dataType="Type" id="2550795538" value="Duality.Components.Renderers.SpriteRenderer" />
         </keys>
         <values dataType="Array" type="System.Object[]" id="1768178910">
           <item dataType="ObjectRef">1007367275</item>
           <item dataType="ObjectRef">2872518658</item>
           <item dataType="ObjectRef">957052044</item>
+          <item dataType="ObjectRef">2418709337</item>
         </values>
       </body>
     </compMap>
