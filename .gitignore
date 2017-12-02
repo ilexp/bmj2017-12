@@ -55,3 +55,6 @@ Game/Source/Code/EditorPlugin/GamePlugin.core.xml
 Game/Source/Code/ProjectPlugins.v12.suo
 Game/Source/Code/.vs/
 AudioProjects/
+Game/Temp/
+Game/Data/desktop.ini
+Game/Data/WorkingFolderIcon.ico
