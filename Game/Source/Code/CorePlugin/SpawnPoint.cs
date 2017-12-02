@@ -50,10 +50,25 @@ namespace Game
 
 		void ICmpUpdatable.OnUpdate()
 		{
+			ParticleEffect effect = this.GameObj.GetComponent<ParticleEffect>();
+
+			bool isActive = this.teamColor != ColorRgba.White;
+			ColorHsva teamColorHsva = this.teamColor.ToHsva();
+			foreach (ParticleEmitter emitter in effect.Emitters)
+			{
+				float spawnAlpha = 1.0f - MathF.Clamp(this.spawnTimer / 5.0f, 0.0f, 1.0f);
+				float alpha = 0.25f + 0.75f * (isActive ? spawnAlpha : 0.0f);
+				emitter.MinColor = this.teamColor.WithAlpha(alpha).ToHsva();
+				emitter.MaxColor = this.teamColor.WithAlpha(alpha).ToHsva();
+			}
+
 			this.spawnTimer -= Time.SPFMult * Time.TimeMult;
 			if (this.spawnTimer <= 0.0f)
 			{
-				this.Spawn();
+				if (isActive)
+				{
+					this.Spawn();
+				}
 				this.spawnTimer += this.spawnDelay;
 			}
 		}

@@ -60,8 +60,8 @@ namespace Game
 
 			transform.MoveByAbs(targetVelocity * Time.TimeMult);
 
-			this.screenShakeOffset = this.screenShake * MathF.Rnd.NextVector3(100.0f);
-			this.screenShakeAngle = this.screenShake * 0.25f * MathF.Rnd.NextFloat(-1.0f, 1.0f);
+			this.screenShakeOffset = this.screenShake * MathF.Rnd.NextVector3(75.0f);
+			this.screenShakeAngle = this.screenShake * 0.2f * MathF.Rnd.NextFloat(-1.0f, 1.0f);
 			this.screenShake += (0.0f - this.screenShake) * 0.075f * Time.TimeMult;
 			if (this.screenShake < 0.01f) this.screenShake = 0.0f;
 

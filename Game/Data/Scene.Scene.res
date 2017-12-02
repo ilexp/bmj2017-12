@@ -1294,6 +1294,7 @@
               <Z dataType="Float">1</Z>
             </displayedTeamColor>
             <gameobj dataType="ObjectRef">1494698076</gameobj>
+            <gameOverFade dataType="Float">0</gameOverFade>
           </item>
         </_items>
         <_size dataType="Int">1</_size>
@@ -1322,72 +1323,64 @@
       <prefabLink />
     </item>
     <item dataType="Struct" type="Duality.GameObject" id="4102889580">
-      <active dataType="Bool">false</active>
+      <active dataType="Bool">true</active>
       <children dataType="Struct" type="System.Collections.Generic.List`1[[Duality.GameObject]]" id="1138479394">
         <_items dataType="Array" type="Duality.GameObject[]" id="2362024720" length="4">
           <item dataType="Struct" type="Duality.GameObject" id="118072109">
             <active dataType="Bool">true</active>
-            <children />
-            <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="3490412409">
-              <_items dataType="Array" type="Duality.Component[]" id="2071668558" length="4">
+            <children dataType="Struct" type="System.Collections.Generic.List`1[[Duality.GameObject]]" id="3490412409">
+              <_items dataType="Array" type="Duality.GameObject[]" id="2071668558" length="4" />
+              <_size dataType="Int">0</_size>
+            </children>
+            <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="2486364544">
+              <_items dataType="Array" type="Duality.Component[]" id="2740182739" length="4">
                 <item dataType="Struct" type="Duality.Components.Transform" id="175349327">
                   <active dataType="Bool">true</active>
-                  <angle dataType="Float">0</angle>
-                  <angleAbs dataType="Float">0</angleAbs>
-                  <angleVel dataType="Float">0</angleVel>
-                  <angleVelAbs dataType="Float">0</angleVelAbs>
-                  <deriveAngle dataType="Bool">true</deriveAngle>
                   <gameobj dataType="ObjectRef">118072109</gameobj>
-                  <ignoreParent dataType="Bool">false</ignoreParent>
-                  <parentTransform />
-                  <pos dataType="Struct" type="Duality.Vector3" />
-                  <posAbs dataType="Struct" type="Duality.Vector3" />
-                  <scale dataType="Float">1</scale>
-                  <scaleAbs dataType="Float">1</scaleAbs>
-                  <vel dataType="Struct" type="Duality.Vector3" />
-                  <velAbs dataType="Struct" type="Duality.Vector3" />
+                </item>
+                <item dataType="Struct" type="Game.ParticleEffect" id="125034096">
+                  <active dataType="Bool">true</active>
+                  <gameobj dataType="ObjectRef">118072109</gameobj>
                 </item>
                 <item dataType="Struct" type="Game.SpawnPoint" id="2040500710">
                   <active dataType="Bool">true</active>
                   <gameobj dataType="ObjectRef">118072109</gameobj>
-                  <spawnDelay dataType="Float">30</spawnDelay>
-                  <spawnPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
-                    <contentPath dataType="String">Data\Gameplay\EnemyShip.Prefab.res</contentPath>
-                  </spawnPrefab>
-                  <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
-                    <A dataType="Byte">255</A>
-                    <B dataType="Byte">255</B>
-                    <G dataType="Byte">255</G>
-                    <R dataType="Byte">255</R>
-                  </teamColor>
                 </item>
               </_items>
-              <_size dataType="Int">2</_size>
+              <_size dataType="Int">3</_size>
             </compList>
-            <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="2486364544" surrogate="true">
+            <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="2771425403" surrogate="true">
               <header />
               <body>
-                <keys dataType="Array" type="System.Object[]" id="2740182739">
+                <keys dataType="Array" type="System.Object[]" id="82049044">
                   <item dataType="ObjectRef">4277005014</item>
-                  <item dataType="Type" id="3826460262" value="Game.SpawnPoint" />
+                  <item dataType="Type" id="296967780" value="Game.SpawnPoint" />
+                  <item dataType="Type" id="1959649302" value="Game.ParticleEffect" />
                 </keys>
-                <values dataType="Array" type="System.Object[]" id="3058186872">
+                <values dataType="Array" type="System.Object[]" id="2452085558">
                   <item dataType="ObjectRef">175349327</item>
                   <item dataType="ObjectRef">2040500710</item>
+                  <item dataType="ObjectRef">125034096</item>
                 </values>
               </body>
             </compMap>
             <compTransform dataType="ObjectRef">175349327</compTransform>
             <identifier dataType="Struct" type="System.Guid" surrogate="true">
               <header>
-                <data dataType="Array" type="System.Byte[]" id="2850491065">cYu1SiU93EujR5yvXCGi7Q==</data>
+                <data dataType="Array" type="System.Byte[]" id="2899286192">cYu1SiU93EujR5yvXCGi7Q==</data>
               </header>
               <body />
             </identifier>
             <initState dataType="Enum" type="Duality.InitState" name="Initialized" value="1" />
             <name dataType="String">SpawnPoint</name>
             <parent dataType="ObjectRef">4102889580</parent>
-            <prefabLink />
+            <prefabLink dataType="Struct" type="Duality.Resources.PrefabLink" id="3550996902">
+              <changes />
+              <obj dataType="ObjectRef">118072109</obj>
+              <prefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+                <contentPath dataType="String">Data\Gameplay\SpawnPoint.Prefab.res</contentPath>
+              </prefab>
+            </prefabLink>
           </item>
         </_items>
         <_size dataType="Int">1</_size>
