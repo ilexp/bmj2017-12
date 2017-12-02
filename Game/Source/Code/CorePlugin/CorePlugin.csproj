@@ -59,10 +59,13 @@
   <ItemGroup>
     <Compile Include="ObjectFieldGenerator.cs" />
     <Compile Include="CorePlugin.cs" />
+    <Compile Include="ParticleEmitter.cs" />
+    <Compile Include="ParticleEffect.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="CameraController.cs" />
     <Compile Include="Laser.cs" />
     <Compile Include="Asteroid.cs" />
+    <Compile Include="Particle.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

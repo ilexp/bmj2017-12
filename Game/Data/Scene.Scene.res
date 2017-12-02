@@ -71,6 +71,7 @@
           </item>
           <item dataType="Struct" type="Game.CameraController" id="626949299">
             <active dataType="Bool">true</active>
+            <extraDist dataType="Float">0</extraDist>
             <gameobj dataType="ObjectRef">3206971464</gameobj>
             <smoothness dataType="Float">1</smoothness>
             <targetObj dataType="Struct" type="Duality.GameObject" id="1578887473">
@@ -273,7 +274,11 @@
                   </item>
                   <item dataType="Struct" type="Game.Ship" id="1208801701">
                     <active dataType="Bool">true</active>
+                    <explosionPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+                      <contentPath dataType="String">Data\Graphics\Explosion.Prefab.res</contentPath>
+                    </explosionPrefab>
                     <gameobj dataType="ObjectRef">1578887473</gameobj>
+                    <health dataType="Float">1</health>
                     <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
                       <contentPath dataType="String">Data\Gameplay\Laser.Prefab.res</contentPath>
                     </laserPrefab>
@@ -486,7 +491,11 @@
           </item>
           <item dataType="Struct" type="Game.Ship" id="3280475042">
             <active dataType="Bool">true</active>
+            <explosionPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+              <contentPath dataType="String">Data\Graphics\Explosion.Prefab.res</contentPath>
+            </explosionPrefab>
             <gameobj dataType="ObjectRef">3650560814</gameobj>
+            <health dataType="Float">1</health>
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
@@ -623,7 +632,11 @@
           </item>
           <item dataType="Struct" type="Game.Ship" id="2650439921">
             <active dataType="Bool">true</active>
+            <explosionPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+              <contentPath dataType="String">Data\Graphics\Explosion.Prefab.res</contentPath>
+            </explosionPrefab>
             <gameobj dataType="ObjectRef">3020525693</gameobj>
+            <health dataType="Float">1</health>
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
@@ -760,7 +773,11 @@
           </item>
           <item dataType="Struct" type="Game.Ship" id="385062464">
             <active dataType="Bool">true</active>
+            <explosionPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+              <contentPath dataType="String">Data\Graphics\Explosion.Prefab.res</contentPath>
+            </explosionPrefab>
             <gameobj dataType="ObjectRef">755148236</gameobj>
+            <health dataType="Float">1</health>
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
@@ -897,7 +914,11 @@
           </item>
           <item dataType="Struct" type="Game.Ship" id="2232443917">
             <active dataType="Bool">true</active>
+            <explosionPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]">
+              <contentPath dataType="String">Data\Graphics\Explosion.Prefab.res</contentPath>
+            </explosionPrefab>
             <gameobj dataType="ObjectRef">2602529689</gameobj>
+            <health dataType="Float">1</health>
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
