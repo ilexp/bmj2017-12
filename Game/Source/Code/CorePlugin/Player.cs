@@ -29,6 +29,11 @@ namespace Game
 
 			this.controlTarget.ThrusterActivity = moveDir * moveSpeed;
 			this.controlTarget.RotateActivity = lookDir * lookIntensity;
+
+			if (gamepad.RightTrigger > 0.5f)
+			{
+				this.controlTarget.FireWeapons();
+			}
 		}
 	}
 }

@@ -57,9 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ObjectFieldGenerator.cs" />
     <Compile Include="CorePlugin.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="CameraController.cs" />
+    <Compile Include="Laser.cs" />
+    <Compile Include="Asteroid.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

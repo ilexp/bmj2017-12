@@ -7,6 +7,7 @@ using Duality.Components;
 using Duality.Components.Renderers;
 using Duality.Components.Physics;
 using Duality.Editor;
+using Duality.Resources;
 
 namespace Game
 {
@@ -16,9 +17,13 @@ namespace Game
 	{
 		private float thrusterStrength = 0.4f;
 		private float rotationSpeed = 0.35f;
+		private float weaponDelay = 0.1f;
+		private ContentRef<Prefab> laserPrefab = null;
+		private List<Transform> weaponSlots = new List<Transform>();
 
-		private Vector2 thrusterActivity;
-		private Vector2 rotateActivity;
+		private Vector2 thrusterActivity = Vector2.Zero;
+		private Vector2 rotateActivity = Vector2.Zero;
+		private float weaponTimer = 0.0f;
 
 
 		public float ThrusterStrength
@@ -30,6 +35,22 @@ namespace Game
 		{
 			get { return this.rotationSpeed; }
 			set { this.rotationSpeed = value; }
+		}
+		[EditorHintRange(0.05f, 1.0f)]
+		public float WeaponDelay
+		{
+			get { return this.weaponDelay; }
+			set { this.weaponDelay = value; }
+		}
+		public ContentRef<Prefab> LaserPrefab
+		{
+			get { return this.laserPrefab; }
+			set { this.laserPrefab = value; }
+		}
+		public List<Transform> WeaponSlots
+		{
+			get { return this.weaponSlots; }
+			set { this.weaponSlots = value ?? new List<Transform>(); }
 		}
 		public Vector2 ThrusterActivity
 		{
@@ -43,6 +64,30 @@ namespace Game
 		}
 
 
+		public void FireWeapons()
+		{
+			if (this.weaponTimer <= 0.0f)
+			{
+				this.weaponTimer += this.weaponDelay;
+				foreach (Transform slot in this.weaponSlots)
+				{
+					Vector2 laserVel = slot.Vel.Xy + Vector2.FromAngleLength(slot.Angle, 20.0f);
+
+					GameObject laserObj = this.laserPrefab.Res.Instantiate();
+					laserObj.Transform.Pos = slot.Pos;
+					laserObj.Transform.Angle = laserVel.Angle;
+					laserObj.GetComponent<RigidBody>().LinearVelocity = laserVel;
+					laserObj.GetComponent<Laser>().Owner = this.GameObj;
+
+					Scene.Current.AddObject(laserObj);
+				}
+			}
+		}
+		public void Hit(Laser laser)
+		{
+
+		}
+
 		void ICmpUpdatable.OnUpdate()
 		{
 			Transform transform = this.GameObj.Transform;
@@ -54,6 +99,8 @@ namespace Game
 
 			body.AngularVelocity = turnDiff * this.rotateActivity.Length * this.rotationSpeed;
 			body.ApplyWorldForce(this.thrusterActivity * this.thrusterStrength * body.Mass);
+
+			this.weaponTimer = MathF.Max(0.0f, this.weaponTimer - Time.TimeMult * Time.SPFMult);
 		}
 	}
 }
