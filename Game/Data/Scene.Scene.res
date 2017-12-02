@@ -284,6 +284,12 @@
                     </laserPrefab>
                     <rotateActivity dataType="Struct" type="Duality.Vector2" />
                     <rotationSpeed dataType="Float">0.15</rotationSpeed>
+                    <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+                      <A dataType="Byte">255</A>
+                      <B dataType="Byte">255</B>
+                      <G dataType="Byte">255</G>
+                      <R dataType="Byte">255</R>
+                    </teamColor>
                     <thrusterActivity dataType="Struct" type="Duality.Vector2" />
                     <thrusterStrength dataType="Float">0.4</thrusterStrength>
                     <weaponDelay dataType="Float">0.2</weaponDelay>
@@ -499,6 +505,12 @@
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
+            <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">255</B>
+              <G dataType="Byte">255</G>
+              <R dataType="Byte">255</R>
+            </teamColor>
             <thrusterActivity dataType="Struct" type="Duality.Vector2" />
             <thrusterStrength dataType="Float">0.4</thrusterStrength>
             <weaponDelay dataType="Float">0.1</weaponDelay>
@@ -640,6 +652,12 @@
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
+            <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">255</B>
+              <G dataType="Byte">255</G>
+              <R dataType="Byte">255</R>
+            </teamColor>
             <thrusterActivity dataType="Struct" type="Duality.Vector2" />
             <thrusterStrength dataType="Float">0.4</thrusterStrength>
             <weaponDelay dataType="Float">0.1</weaponDelay>
@@ -781,6 +799,12 @@
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
+            <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">255</B>
+              <G dataType="Byte">255</G>
+              <R dataType="Byte">255</R>
+            </teamColor>
             <thrusterActivity dataType="Struct" type="Duality.Vector2" />
             <thrusterStrength dataType="Float">0.4</thrusterStrength>
             <weaponDelay dataType="Float">0.1</weaponDelay>
@@ -922,6 +946,12 @@
             <laserPrefab dataType="Struct" type="Duality.ContentRef`1[[Duality.Resources.Prefab]]" />
             <rotateActivity dataType="Struct" type="Duality.Vector2" />
             <rotationSpeed dataType="Float">0.15</rotationSpeed>
+            <teamColor dataType="Struct" type="Duality.Drawing.ColorRgba">
+              <A dataType="Byte">255</A>
+              <B dataType="Byte">255</B>
+              <G dataType="Byte">255</G>
+              <R dataType="Byte">255</R>
+            </teamColor>
             <thrusterActivity dataType="Struct" type="Duality.Vector2" />
             <thrusterStrength dataType="Float">0.4</thrusterStrength>
             <weaponDelay dataType="Float">0.1</weaponDelay>

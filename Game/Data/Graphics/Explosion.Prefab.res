@@ -61,8 +61,8 @@
                         <MinValue dataType="Float">500</MinValue>
                       </burstDelay>
                       <burstParticleNum dataType="Struct" type="Duality.Range">
-                        <MaxValue dataType="Float">25</MaxValue>
-                        <MinValue dataType="Float">25</MinValue>
+                        <MaxValue dataType="Float">35</MaxValue>
+                        <MinValue dataType="Float">35</MinValue>
                       </burstParticleNum>
                       <depthMult dataType="Float">1</depthMult>
                       <maxBurstCount dataType="Int">1</maxBurstCount>
@@ -92,7 +92,7 @@
                       </randomAngleVel>
                       <randomPos dataType="Struct" type="Duality.Range" />
                       <randomVel dataType="Struct" type="Duality.Range">
-                        <MaxValue dataType="Float">15</MaxValue>
+                        <MaxValue dataType="Float">20</MaxValue>
                         <MinValue dataType="Float">8</MinValue>
                       </randomVel>
                       <spriteIndex dataType="Struct" type="Duality.Range">

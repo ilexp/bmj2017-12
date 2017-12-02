@@ -8,6 +8,7 @@ using Duality.Components.Renderers;
 using Duality.Components.Physics;
 using Duality.Editor;
 using Duality.Resources;
+using Duality.Drawing;
 
 namespace Game
 {
@@ -16,6 +17,7 @@ namespace Game
 	public class Ship : Component, ICmpUpdatable
 	{
 		private float health = 1.0f;
+		private ColorRgba teamColor = ColorRgba.White;
 		private float thrusterStrength = 0.4f;
 		private float rotationSpeed = 0.35f;
 		private float weaponDelay = 0.1f;
@@ -28,6 +30,16 @@ namespace Game
 		private float weaponTimer = 0.0f;
 
 
+		public float Health
+		{
+			get { return this.health; }
+			set { this.health = value; }
+		}
+		public ColorRgba TeamColor
+		{
+			get { return this.teamColor; }
+			set { this.teamColor = value; }
+		}
 		public float ThrusterStrength
 		{
 			get { return this.thrusterStrength; }
@@ -85,6 +97,7 @@ namespace Game
 					laserObj.Transform.Angle = laserVel.Angle;
 					laserObj.GetComponent<RigidBody>().LinearVelocity = laserVel;
 					laserObj.GetComponent<Laser>().Owner = this.GameObj;
+					laserObj.GetComponent<Laser>().TeamColor = this.teamColor;
 
 					Scene.Current.AddObject(laserObj);
 				}
@@ -100,7 +113,17 @@ namespace Game
 		}
 		public void Explode()
 		{
-			this.GameObj.ParentScene.AddObject(this.explosionPrefab.Res.Instantiate(this.GameObj.Transform.Pos));
+			ColorHsva teamColorHsva = this.teamColor.ToHsva();
+			GameObject explosionObj = this.explosionPrefab.Res.Instantiate(this.GameObj.Transform.Pos);
+			foreach (ParticleEffect effect in explosionObj.GetComponentsDeep<ParticleEffect>())
+			{
+				foreach (ParticleEmitter emitter in effect.Emitters)
+				{
+					emitter.MinColor = emitter.MinColor.WithHue(MathF.Lerp(emitter.MinColor.H, teamColorHsva.H, teamColorHsva.S));
+					emitter.MaxColor = emitter.MaxColor.WithHue(MathF.Lerp(emitter.MaxColor.H, teamColorHsva.H, teamColorHsva.S));
+				}
+			}
+			this.GameObj.ParentScene.AddObject(explosionObj);
 			this.GameObj.DisposeLater();
 		}
 
@@ -108,6 +131,7 @@ namespace Game
 		{
 			Transform transform = this.GameObj.Transform;
 			RigidBody body = this.GameObj.GetComponent<RigidBody>();
+			SpriteRenderer sprite = this.GameObj.GetComponent<SpriteRenderer>();
 
 			float turnDiff = 
 				MathF.TurnDir(transform.Angle, this.rotateActivity.Angle) * 
@@ -115,6 +139,8 @@ namespace Game
 
 			body.AngularVelocity = turnDiff * this.rotateActivity.Length * this.rotationSpeed;
 			body.ApplyWorldForce(this.thrusterActivity * this.thrusterStrength * body.Mass);
+
+			sprite.ColorTint = ColorRgba.Lerp(sprite.ColorTint, this.teamColor, 0.1f * Time.TimeMult);
 
 			this.weaponTimer = MathF.Max(0.0f, this.weaponTimer - Time.TimeMult * Time.SPFMult);
 		}

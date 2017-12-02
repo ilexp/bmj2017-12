@@ -8,6 +8,7 @@ using Duality.Components.Renderers;
 using Duality.Components.Physics;
 using Duality.Editor;
 using Duality.Resources;
+using Duality.Drawing;
 
 namespace Game
 {
@@ -17,6 +18,7 @@ namespace Game
 	{
 		private float lifetime = 5.0f;
 		private GameObject owner = null;
+		private ColorRgba teamColor = ColorRgba.White;
 
 		public float Lifetime
 		{
@@ -28,9 +30,23 @@ namespace Game
 			get { return this.owner; }
 			set { this.owner = value; }
 		}
+		public ColorRgba TeamColor
+		{
+			get { return this.teamColor; }
+			set { this.teamColor = value; this.UpdateColor(); }
+		}
+
+		private void UpdateColor()
+		{
+			SpriteRenderer sprite = this.GameObj.GetComponent<SpriteRenderer>();
+			float fadeOut = MathF.Clamp(this.lifetime / 0.25f, 0.0f, 1.0f);
+			sprite.ColorTint = this.teamColor.WithAlpha(fadeOut);
+		}
 
 		void ICmpUpdatable.OnUpdate()
 		{
+			this.UpdateColor();
+
 			this.lifetime -= Time.TimeMult * Time.SPFMult;
 			if (this.lifetime < 0.0f)
 			{
@@ -55,6 +71,7 @@ namespace Game
 			Ship otherShip = args.CollideWith.GetComponent<Ship>();
 			if (otherShip == null) return;
 			if (args.CollideWith == this.owner) return;
+			if (otherShip.TeamColor == this.TeamColor) return;
 
 			otherShip.Hit(this);
 			this.GameObj.DisposeLater();
