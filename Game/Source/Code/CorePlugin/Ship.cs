@@ -203,7 +203,7 @@ namespace Game
 			}
 			else
 			{
-				SoundInstance sound = DualityApp.Sound.PlaySound3D(this.explosionSound, this.GameObj);
+				SoundInstance sound = DualityApp.Sound.PlaySound3D(this.explosionSound, this.GameObj.Transform.Pos);
 				sound.Volume = 0.75f;
 				sound.Lowpass = 0.75f;
 			}
