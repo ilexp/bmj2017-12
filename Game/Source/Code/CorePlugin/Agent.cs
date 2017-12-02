@@ -33,12 +33,12 @@ namespace Game
 
 			this.UpdateControls();
 
-			if (this.attackTarget != null)
-			{
-				VisualLog.Default.DrawConnection(
-					this.GameObj.Transform.Pos,
-					this.attackTarget.GameObj.Transform.Pos.Xy);
-			}
+			//if (this.attackTarget != null)
+			//{
+			//	VisualLog.Default.DrawConnection(
+			//		this.GameObj.Transform.Pos,
+			//		this.attackTarget.GameObj.Transform.Pos.Xy);
+			//}
 		}
 
 		private void UpdateAttackTarget()
@@ -59,22 +59,9 @@ namespace Game
 				}
 			}
 
-			Ship nearestTarget = null;
-			float nearestDist = pickUpTargetDist;
-			foreach (Ship otherShip in this.GameObj.ParentScene.FindComponents<Ship>())
-			{
-				if (otherShip == ship) continue;
-				if (otherShip.TeamColor == ship.TeamColor) continue;
-
-				float distance = (otherShip.GameObj.Transform.Pos - this.GameObj.Transform.Pos).Length;
-				if (distance < nearestDist)
-				{
-					nearestDist = distance;
-					nearestTarget = otherShip;
-				}
-			}
-
-			this.attackTarget = nearestTarget;
+			this.attackTarget = this.GetNearestShip(
+				pickUpTargetDist, 
+				otherShip => otherShip.TeamColor != ship.TeamColor);
 		}
 		private void UpdateControls()
 		{
@@ -87,14 +74,51 @@ namespace Game
 			if (this.attackTarget != null)
 			{
 				Vector2 diffToTarget = (this.attackTarget.GameObj.Transform.Pos - this.GameObj.Transform.Pos).Xy;
-				moveInDirection = diffToTarget.Normalized;
-				rotateTo = diffToTarget.Normalized;
+				moveInDirection += MapVectorToUnit(diffToTarget, 300.0f, 500.0f);
+				rotateTo += diffToTarget.Normalized;
 			}
 
-			ship.ThrusterActivity = moveInDirection;
-			ship.RotateActivity = rotateTo;
+			Ship nearShip = this.GetNearestShip(250.0f, null);
+			if (nearShip != null)
+			{
+				Vector2 diffToNear = (nearShip.GameObj.Transform.Pos - this.GameObj.Transform.Pos).Xy;
+				moveInDirection += -MapVectorToUnit(diffToNear, 100.0f, 250.0f, x => 1.0f - x);
+			}
+
+			ship.ThrusterActivity = moveInDirection.Normalized;
+			ship.RotateActivity = rotateTo.Normalized;
 			if (fireWeapons)
 				ship.FireWeapons();
+		}
+
+		private Ship GetNearestShip(float maxDist, Predicate<Ship> predicate)
+		{
+			Ship ship = this.GameObj.GetComponent<Ship>();
+
+			Ship nearestTarget = null;
+			float nearestDist = maxDist;
+			foreach (Ship otherShip in this.GameObj.ParentScene.FindComponents<Ship>())
+			{
+				if (otherShip == ship) continue;
+				if (predicate != null && !predicate(otherShip)) continue;
+
+				float distance = (otherShip.GameObj.Transform.Pos - this.GameObj.Transform.Pos).Length;
+				if (distance < nearestDist)
+				{
+					nearestDist = distance;
+					nearestTarget = otherShip;
+				}
+			}
+
+			return nearestTarget;
+		}
+
+		private static Vector2 MapVectorToUnit(Vector2 vector, float minLength, float maxLength, Func<float,float> lengthFunc = null)
+		{
+			if (lengthFunc == null)
+				lengthFunc = x => x;
+			float length = vector.Length;
+			return vector.Normalized * MathF.Clamp(lengthFunc((length - minLength) / (maxLength - minLength)), 0.0f, 1.0f);
 		}
 	}
 }
