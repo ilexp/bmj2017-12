@@ -14,8 +14,7 @@ namespace Game
 		private Ship controlTarget;
 		private ContentRef<Sound> backgroundMusic;
 
-		[DontSerialize]
-		private SoundInstance musicInstance;
+		private static SoundInstance musicInstance;
 
 		public Ship ControlTarget
 		{
@@ -48,18 +47,19 @@ namespace Game
 
 			if (gamepad.ButtonHit(GamepadButton.Start))
 			{
-				this.musicInstance.FadeOut(1.0f);
+				if (musicInstance != null && !musicInstance.Disposed)
+					musicInstance.Lowpass = 1.0f;
 				Scene.Reload();
 			}
 			if (gamepad.ButtonHit(GamepadButton.Back))
 				DualityApp.Terminate();
 
-			if (this.musicInstance == null || this.musicInstance.Disposed)
+			if (musicInstance == null || musicInstance.Disposed)
 			{
-				this.musicInstance = DualityApp.Sound.PlaySound(this.backgroundMusic);
-				this.musicInstance.Looped = true;
-				this.musicInstance.Volume = 0.4f;
-				this.musicInstance.BeginFadeIn(5.0f);
+				musicInstance = DualityApp.Sound.PlaySound(this.backgroundMusic);
+				musicInstance.Looped = true;
+				musicInstance.Volume = 0.4f;
+				musicInstance.BeginFadeIn(5.0f);
 			}
 			else
 			{
@@ -69,12 +69,12 @@ namespace Game
 				else
 					targetLowPass = 1.0f;
 
-				float changeDir = MathF.Sign(targetLowPass - this.musicInstance.Lowpass);
-				float changeAbs = MathF.Abs(targetLowPass - this.musicInstance.Lowpass);
+				float changeDir = MathF.Sign(targetLowPass - musicInstance.Lowpass);
+				float changeAbs = MathF.Abs(targetLowPass - musicInstance.Lowpass);
 				if (changeAbs <= 0.01f)
-					this.musicInstance.Lowpass = targetLowPass;
+					musicInstance.Lowpass = targetLowPass;
 				else
-					this.musicInstance.Lowpass += changeDir * Time.TimeMult * Time.SPFMult / 8.0f;
+					musicInstance.Lowpass += changeDir * Time.TimeMult * Time.SPFMult / 8.0f;
 			}
 		}
 	}
