@@ -58,8 +58,8 @@ namespace Game
 			{
 				this.musicInstance = DualityApp.Sound.PlaySound(this.backgroundMusic);
 				this.musicInstance.Looped = true;
-				this.musicInstance.Volume = 0.3f;
-				this.musicInstance.BeginFadeIn(3.0f);
+				this.musicInstance.Volume = 0.4f;
+				this.musicInstance.BeginFadeIn(5.0f);
 			}
 			else
 			{
