@@ -1280,6 +1280,41 @@
       <parent />
       <prefabLink />
     </item>
+    <item dataType="Struct" type="Duality.GameObject" id="1494698076">
+      <active dataType="Bool">true</active>
+      <children />
+      <compList dataType="Struct" type="System.Collections.Generic.List`1[[Duality.Component]]" id="1194540338">
+        <_items dataType="Array" type="Duality.Component[]" id="1471890384" length="4">
+          <item dataType="Struct" type="Game.HeadUpDisplay" id="2252878955">
+            <active dataType="Bool">true</active>
+            <gameobj dataType="ObjectRef">1494698076</gameobj>
+          </item>
+        </_items>
+        <_size dataType="Int">1</_size>
+      </compList>
+      <compMap dataType="Struct" type="System.Collections.Generic.Dictionary`2[[System.Type],[Duality.Component]]" id="949887818" surrogate="true">
+        <header />
+        <body>
+          <keys dataType="Array" type="System.Object[]" id="1627606568">
+            <item dataType="Type" id="2002063788" value="Game.HeadUpDisplay" />
+          </keys>
+          <values dataType="Array" type="System.Object[]" id="1035472542">
+            <item dataType="ObjectRef">2252878955</item>
+          </values>
+        </body>
+      </compMap>
+      <compTransform />
+      <identifier dataType="Struct" type="System.Guid" surrogate="true">
+        <header>
+          <data dataType="Array" type="System.Byte[]" id="1154969364">V0UGXz2uXE6OOL7JQnKLJg==</data>
+        </header>
+        <body />
+      </identifier>
+      <initState dataType="Enum" type="Duality.InitState" name="Initialized" value="1" />
+      <name dataType="String">HeadUpDisplay</name>
+      <parent />
+      <prefabLink />
+    </item>
     <item dataType="ObjectRef">1578887473</item>
     <item dataType="ObjectRef">12716793</item>
     <item dataType="ObjectRef">1043871852</item>

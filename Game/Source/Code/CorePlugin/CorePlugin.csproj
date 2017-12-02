@@ -61,12 +61,14 @@
     <Compile Include="CorePlugin.cs" />
     <Compile Include="ParticleEmitter.cs" />
     <Compile Include="ParticleEffect.cs" />
+    <Compile Include="HeadUpDisplay.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="CameraController.cs" />
     <Compile Include="Laser.cs" />
     <Compile Include="Asteroid.cs" />
     <Compile Include="Particle.cs" />
     <Compile Include="Agent.cs" />
+    <Compile Include="ColorUtil.cs" />
     <Compile Include="Ship.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

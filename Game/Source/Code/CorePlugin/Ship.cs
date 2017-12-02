@@ -30,6 +30,8 @@ namespace Game
 		private Vector2 rotateActivity = Vector2.Zero;
 		private float weaponTimer = 0.0f;
 
+		[DontSerialize] private Vector4 displayedTeamColor = ColorRgba.White.ToVector();
+
 
 		public float Health
 		{
@@ -117,6 +119,7 @@ namespace Game
 			this.health -= 0.2f;
 			if (this.health <= 0.0f)
 			{
+				this.health = 0.0f;
 				this.Explode();
 			}
 			CameraController.ApplyScreenShake(this.GameObj.Transform.Pos, 0.15f, this.GameObj);
@@ -154,7 +157,8 @@ namespace Game
 			body.AngularVelocity = turnDiff * this.rotateActivity.Length * this.rotationSpeed;
 			body.ApplyWorldForce(this.thrusterActivity * this.thrusterStrength * (1.0f + 0.5f * thrusterBoost) * body.Mass);
 
-			sprite.ColorTint = ColorRgba.Lerp(sprite.ColorTint, this.teamColor, 0.1f * Time.TimeMult);
+			this.displayedTeamColor = Vector4.Lerp(this.displayedTeamColor, this.teamColor.ToVector(), 0.1f * Time.TimeMult);
+			sprite.ColorTint = this.displayedTeamColor.ToColor();
 
 			this.weaponTimer = MathF.Max(0.0f, this.weaponTimer - Time.TimeMult * Time.SPFMult);
 			this.weaponEnergy = MathF.Min(1.0f, this.weaponEnergy + Time.TimeMult * Time.SPFMult / 5.0f);
@@ -165,7 +169,8 @@ namespace Game
 			if (context == InitContext.Activate && DualityApp.ExecContext == DualityApp.ExecutionContext.Game)
 			{
 				SpriteRenderer sprite = this.GameObj.GetComponent<SpriteRenderer>();
-				sprite.ColorTint = this.teamColor;
+				this.displayedTeamColor = this.teamColor.ToVector();
+				sprite.ColorTint = this.displayedTeamColor.ToColor();
 			}
 		}
 		void ICmpInitializable.OnShutdown(ShutdownContext context) { }
