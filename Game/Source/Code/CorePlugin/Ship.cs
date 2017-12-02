@@ -21,6 +21,7 @@ namespace Game
 		private float thrusterStrength = 0.4f;
 		private float rotationSpeed = 0.35f;
 		private float weaponDelay = 0.1f;
+		private float weaponEnergy = 1.0f;
 		private ContentRef<Prefab> laserPrefab = null;
 		private ContentRef<Prefab> explosionPrefab = null;
 		private List<Transform> weaponSlots = new List<Transform>();
@@ -34,6 +35,11 @@ namespace Game
 		{
 			get { return this.health; }
 			set { this.health = value; }
+		}
+		public float WeaponEnergy
+		{
+			get { return this.weaponEnergy; }
+			set { this.weaponEnergy = value; }
 		}
 		public ColorRgba TeamColor
 		{
@@ -90,6 +96,9 @@ namespace Game
 				this.weaponTimer += this.weaponDelay;
 				foreach (Transform slot in this.weaponSlots)
 				{
+					if (this.weaponEnergy < 0.1f) continue;
+					this.weaponEnergy -= 0.1f;
+
 					Vector2 laserVel = slot.Vel.Xy + Vector2.FromAngleLength(slot.Angle, 20.0f);
 
 					GameObject laserObj = this.laserPrefab.Res.Instantiate();
@@ -138,13 +147,18 @@ namespace Game
 			float turnDiff = 
 				MathF.TurnDir(transform.Angle, this.rotateActivity.Angle) * 
 				MathF.CircularDist(transform.Angle, this.rotateActivity.Angle);
+			float thrusterBoost = 
+				0.75f * Vector2.Dot(this.thrusterActivity.Normalized, Vector2.FromAngleLength(transform.Angle, 1.0f)) +
+				0.25f * this.weaponEnergy;
 
 			body.AngularVelocity = turnDiff * this.rotateActivity.Length * this.rotationSpeed;
-			body.ApplyWorldForce(this.thrusterActivity * this.thrusterStrength * body.Mass);
+			body.ApplyWorldForce(this.thrusterActivity * this.thrusterStrength * (1.0f + 0.5f * thrusterBoost) * body.Mass);
 
 			sprite.ColorTint = ColorRgba.Lerp(sprite.ColorTint, this.teamColor, 0.1f * Time.TimeMult);
 
 			this.weaponTimer = MathF.Max(0.0f, this.weaponTimer - Time.TimeMult * Time.SPFMult);
+			this.weaponEnergy = MathF.Min(1.0f, this.weaponEnergy + Time.TimeMult * Time.SPFMult / 5.0f);
+			this.health = MathF.Min(1.0f, this.health + Time.TimeMult * Time.SPFMult / 30.0f);
 		}
 		void ICmpInitializable.OnInit(InitContext context)
 		{

@@ -79,6 +79,11 @@ namespace Game
 				Vector2 diffToTarget = (this.attackTarget.GameObj.Transform.Pos - this.GameObj.Transform.Pos).Xy;
 				moveInDirection += MapVectorToUnit(diffToTarget, 300.0f, 500.0f);
 				rotateTo += diffToTarget.Normalized;
+
+				float targetInFiringAngle = Vector2.Dot(diffToTarget.Normalized, this.GameObj.Transform.Forward.Xy);
+				float energyThreshold = 1.0f - ship.WeaponEnergy;
+				if (targetInFiringAngle > 0.975f + 0.025f * energyThreshold)
+					fireWeapons = true;
 			}
 
 			Ship nearShip = this.GetNearestShip(350.0f, null);
