@@ -119,6 +119,7 @@ namespace Game
 
 		public void FireWeapons()
 		{
+			if (this.Disposed) return;
 			if (this.weaponTimer <= 0.0f)
 			{
 				this.weaponTimer += this.weaponDelay;
@@ -157,6 +158,8 @@ namespace Game
 		}
 		public void Hit(Laser laser)
 		{
+			if (this.Disposed) return;
+
 			this.health -= 0.2f;
 			if (this.health <= 0.0f)
 			{
@@ -178,6 +181,8 @@ namespace Game
 		}
 		public void Explode()
 		{
+			if (this.Disposed) return;
+
 			ColorHsva teamColorHsva = this.teamColor.ToHsva();
 			GameObject explosionObj = this.explosionPrefab.Res.Instantiate(this.GameObj.Transform.Pos);
 			foreach (ParticleEffect effect in explosionObj.GetComponentsDeep<ParticleEffect>())
@@ -201,6 +206,12 @@ namespace Game
 				SoundInstance sound = DualityApp.Sound.PlaySound3D(this.explosionSound, this.GameObj);
 				sound.Volume = 0.75f;
 				sound.Lowpass = 0.75f;
+			}
+
+			if (this.thrusterSoundInstance != null)
+			{
+				this.thrusterSoundInstance.FadeOut(0.5f);
+				this.thrusterSoundInstance = null;
 			}
 		}
 
@@ -227,12 +238,19 @@ namespace Game
 			this.weaponEnergy = MathF.Min(1.0f, this.weaponEnergy + Time.TimeMult * Time.SPFMult / 5.0f);
 			this.health = MathF.Min(1.0f, this.health + Time.TimeMult * Time.SPFMult / 30.0f);
 
-			//if (this.thrusterSoundInstance == null || this.thrusterSoundInstance.Disposed)
-			//{
-			//	this.thrusterSoundInstance = DualityApp.Sound.PlaySound3D(this.thrusterSound, this.GameObj);
-			//	this.thrusterSoundInstance.Looped = true;
-			//	this.thrusterSoundInstance.Volume = this.thrusterActivity.Length * (1.0f + 0.5f * thrusterBoost);
-			//}
+			if (this == this.GameObj.ParentScene.FindComponent<Player>().ControlTarget)
+			{
+				if (!this.Disposed)
+				{
+					if (this.thrusterSoundInstance == null || this.thrusterSoundInstance.Disposed)
+					{
+						this.thrusterSoundInstance = DualityApp.Sound.PlaySound(this.thrusterSound);
+						this.thrusterSoundInstance.Looped = true;
+					}
+					this.thrusterSoundInstance.Volume = this.thrusterActivity.Length * (0.5f + 0.5f * thrusterBoost);
+					this.thrusterSoundInstance.Pitch = 0.8f + 0.4f * this.thrusterActivity.Length * (0.5f + 0.5f * thrusterBoost);
+				}
+			}
 		}
 		void ICmpInitializable.OnInit(InitContext context)
 		{
