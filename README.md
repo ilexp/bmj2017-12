@@ -1,6 +1,8 @@
 # Game Jam Entry: "Spaceshooter Thing"
 
-Experimenting with a team-based gameplay in a top-down dual stick space shooter.
+Experimenting with a team-based gameplay in a top-down dual stick space shooter. 
+
+Graphics assets used are from [Kenney](https://kenney.nl/), audio is partially recycled from an older project of mine, and partially taken from the old Freespace games.
 
 ## Running it
 
